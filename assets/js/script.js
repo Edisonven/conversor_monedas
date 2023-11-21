@@ -17,7 +17,7 @@ async function renderDolar() {
   seriePrimerValor = series[0].valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / Number(seriePrimerValor);
-  conversorResultado.textContent = `Resultado: $${resultado} USD`;
+  conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} USD`;
   conversorInput.value = "";
 }
 
