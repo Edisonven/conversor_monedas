@@ -58,6 +58,7 @@ botonConversor.addEventListener("click", () => {
         (conversorResultado.textContent = "...");
     else {
       renderDolar();
+      renderDolarGrafica();
       alertId1.textContent = "";
     }
   } else if (select.value === "euro") {
@@ -66,7 +67,78 @@ botonConversor.addEventListener("click", () => {
         (conversorResultado.textContent = "...");
     else {
       renderEuro();
+      rendereuroGrafica()
       alertId1.textContent = "";
     }
   }
 });
+
+//funcion que obtiene y retorna la data para la gráfica en dolares
+async function getAndCreateDataToChart() {
+  let titulo = "Valor de los últimos 10 días";
+  let color = "rgb(255, 99, 132)";
+  const respuesta = await fetch(dolarURL);
+  const series = await respuesta.json();
+  const labels = series.serie.map((serie) => serie.fecha);
+  labels.length = 10;
+  const data = series.serie.map((serie) => {
+    const valor = serie.valor;
+    return Number(valor);
+  });
+  const datasets = [
+    {
+      label: titulo,
+      borderColor: color,
+      data,
+    },
+  ];
+  return { labels, datasets };
+}
+
+//funcion que renderiza la grafica en dolares
+async function renderDolarGrafica() {
+  let tipoDeGrafica = "line";
+  const data = await getAndCreateDataToChart();
+  const config = {
+    type: tipoDeGrafica,
+    data,
+  };
+  const myChart = document.getElementById("myChart");
+  myChart.style.backgroundColor = "white";
+  new Chart(myChart, config);
+}
+
+//funcion que obtiene y retorna la data para la gráfica en euros
+async function getAndCreateDataToChart() {
+  let titulo = "Valor de los últimos 10 días";
+  let color = "rgb(255, 99, 132)";
+  const respuesta = await fetch(euroURL);
+  const series = await respuesta.json();
+  const labels = series.serie.map((serie) => serie.fecha);
+  labels.length = 10;
+  const data = series.serie.map((serie) => {
+    const valor = serie.valor;
+    return Number(valor);
+  });
+  const datasets = [
+    {
+      label: titulo,
+      borderColor: color,
+      data,
+    },
+  ];
+  return { labels, datasets };
+}
+
+//funcion que renderiza la grafica en euros
+async function rendereuroGrafica() {
+  let tipoDeGrafica = "line";
+  const data = await getAndCreateDataToChart();
+  const config = {
+    type: tipoDeGrafica,
+    data,
+  };
+  const myChart = document.getElementById("myChart");
+  myChart.style.backgroundColor = "white";
+  new Chart(myChart, config);
+}
