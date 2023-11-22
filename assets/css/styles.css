@@ -75,3 +75,7 @@ input[type="text"] {
   background-color: var(--color-terceario);
   color: var(--color-primario);
 }
+
+.alert {
+  margin-top: 8px;
+}
