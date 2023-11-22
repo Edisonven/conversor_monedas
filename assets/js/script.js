@@ -37,17 +37,25 @@ async function renderEuro() {
 //función que muestra la conversión de moneda de peso a dolar
 botonConversor.addEventListener("click", () => {
   let select = document.getElementById("select-1");
+  let alertId1 = document.getElementById("alert-1");
+  let alertId2 = document.getElementById("alert-2");
+
   if (select.value === "coin") {
-    alert("Debes seleccionar una moneda");
-  } else if (select.value === "dolar") {
-    if (conversorInput.value === "") alert("ingresa un monto");
+    alertId2.textContent = "Selecciona una moneda";
+  } else {
+    alertId2.textContent = "";
+  }
+  if (select.value === "dolar") {
+    if (conversorInput.value === "") alertId1.textContent = "ingresa un monto";
     else {
       renderDolar();
+      alertId1.textContent = "";
     }
   } else if (select.value === "euro") {
-    if (conversorInput.value === "") alert("ingresa un monto");
+    if (conversorInput.value === "") alertId1.textContent = "ingresa un monto";
     else {
       renderEuro();
+      alertId1.textContent = "";
     }
   }
 });

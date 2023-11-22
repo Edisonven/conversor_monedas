@@ -20,21 +20,23 @@
 
                 <!--   titulo del conversor -->
                 <label class="conversor__body__title" for="input-1">Pesos CLP</label>
+                <input id="input-1" type="text" name="input-1" placeholder="Ingrese un monto en CLP">
 
                 <!--    alerta que aparece si no has ingresado un monto -->
-                <p id="alert" style="color: red;"></p>
-
-                <input id="input-1" type="text" name="input-1" placeholder="Ingrese un monto en CLP">
+                <p id="alert-1" style="color: red;"></p>
                 <label class="conversor__label__title" for="select-1">Moneda a convertir:</label>
 
                 <!--   select con distintas opciones -->
                 <select class="conversor__select-1" name="select-1" id="select-1">
-                    <option value="coin">Seleccione moneda</option>
 
-                    <!--   opciones para convertir divisas -->
+                      <!--   opciones para convertir divisas -->
+                    <option value="coin">Seleccione moneda</option>
                     <option value="dolar">Dolar</option>
                     <option value="euro">Euro</option>
                 </select>
+                
+                <!--    alerta que aparece si no has seleccionado una moneda -->
+                <p id="alert-2" style="color: red;"></p>
 
                 <!--   boton que captura los valores del input -->
                 <button id="btn-1" class="conversor__btn-1">Convertir</button>
