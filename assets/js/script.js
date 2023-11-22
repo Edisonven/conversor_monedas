@@ -2,10 +2,16 @@ let conversorInput = document.getElementById("input-1");
 let conversorResultado = document.getElementById("resultado");
 let botonConversor = document.getElementById("btn-1");
 let dolarURL = "https://www.mindicador.cl/api/dolar";
+let euroURL = "https://www.mindicador.cl/api/euro";
 
 //función que hace una petición a una API, y lo transforma a objeto
 async function dolarConversor() {
   const respuesta = await fetch(dolarURL);
+  const data = await respuesta.json();
+  return data;
+}
+async function euroConversor() {
+  const respuesta = await fetch(euroURL);
   const data = await respuesta.json();
   return data;
 }
@@ -18,7 +24,14 @@ async function renderDolar() {
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / Number(seriePrimerValor);
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} USD`;
-  conversorInput.value = "";
+}
+async function renderEuro() {
+  const euros = await euroConversor();
+  series = euros.serie;
+  seriePrimerValor = series[0].valor;
+  let inputValue = conversorInput.value;
+  resultado = Number(inputValue) / Number(seriePrimerValor);
+  conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} EUR`;
 }
 
 //función que muestra la conversión de moneda de peso a dolar
@@ -26,8 +39,15 @@ botonConversor.addEventListener("click", () => {
   let select = document.getElementById("select-1");
   if (select.value === "coin") {
     alert("Debes seleccionar una moneda");
-  }
-  if (select.value === "dolar") {
-    renderDolar();
+  } else if (select.value === "dolar") {
+    if (conversorInput.value === "") alert("ingresa un monto");
+    else {
+      renderDolar();
+    }
+  } else if (select.value === "euro") {
+    if (conversorInput.value === "") alert("ingresa un monto");
+    else {
+      renderEuro();
+    }
   }
 });
