@@ -78,22 +78,26 @@ botonConversor.addEventListener("click", () => {
 async function getAndCreateDataToChartDolar() {
   let titulo = "Valor de los últimos 10 días";
   let color = "rgb(255, 99, 132)";
-  const respuesta = await fetch(dolarURL);
-  const series = await respuesta.json();
-  const labels = series.serie.map((serie) => serie.fecha.slice(0, 10));
-  labels.length = 10;
-  const data = series.serie.map((serie) => {
-    const valor = serie.valor;
-    return Number(valor);
-  });
-  const datasets = [
-    {
-      label: titulo,
-      borderColor: color,
-      data,
-    },
-  ];
-  return { labels, datasets };
+  try {
+    const respuesta = await fetch(dolarURL);
+    const series = await respuesta.json();
+    const labels = series.serie.map((serie) => serie.fecha.slice(0, 10));
+    labels.length = 10;
+    const data = series.serie.map((serie) => {
+      const valor = serie.valor;
+      return Number(valor);
+    });
+    const datasets = [
+      {
+        label: titulo,
+        borderColor: color,
+        data,
+      },
+    ];
+    return { labels, datasets };
+  } catch (error) {
+    alert(error.message);
+  }
 }
 
 //funcion que renderiza la grafica en dolares
@@ -113,22 +117,26 @@ async function renderDolarGrafica() {
 async function getAndCreateDataToChartEuro() {
   let titulo = "Valor de los últimos 10 días";
   let color = "rgb(255, 99, 132)";
-  const respuesta = await fetch(euroURL);
-  const series = await respuesta.json();
-  const labels = series.serie.map((serie) => serie.fecha.slice(0, 10));
-  labels.length = 10;
-  const data = series.serie.map((serie) => {
-    const valor = serie.valor;
-    return Number(valor);
-  });
-  const datasets = [
-    {
-      label: titulo,
-      borderColor: color,
-      data,
-    },
-  ];
-  return { labels, datasets };
+  try {
+    const respuesta = await fetch(euroURL);
+    const series = await respuesta.json();
+    const labels = series.serie.map((serie) => serie.fecha.slice(0, 10));
+    labels.length = 10;
+    const data = series.serie.map((serie) => {
+      const valor = serie.valor;
+      return Number(valor);
+    });
+    const datasets = [
+      {
+        label: titulo,
+        borderColor: color,
+        data,
+      },
+    ];
+    return { labels, datasets };
+  } catch (error) {
+    alert(error.message);
+  }
 }
 
 //funcion que renderiza la grafica en euros
