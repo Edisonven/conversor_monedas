@@ -115,7 +115,7 @@ async function getAndCreateDataToChartEuro() {
   let color = "rgb(255, 99, 132)";
   const respuesta = await fetch(euroURL);
   const series = await respuesta.json();
-  const labels = series.serie.map((serie) => serie.fecha);
+  const labels = series.serie.map((serie) => serie.fecha.slice(0, 10));
   labels.length = 10;
   const data = series.serie.map((serie) => {
     const valor = serie.valor;
