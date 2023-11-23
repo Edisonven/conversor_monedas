@@ -8,26 +8,8 @@ let euroURL = "https://www.mindicador.cl/api/euro";
 let ufURL = "https://www.mindicador.cl/api/uf";
 let divisas = "https://www.mindicador.cl/api";
 
-//funciones que hacen una petición a una API, y lo transforman a objeto
-async function dolarConversor() {
-  try {
-    const respuesta = await fetch(divisas);
-    const data = await respuesta.json();
-    return data;
-  } catch (error) {
-    conversorResultado.textContent = `Algo salió mal :( ${error.message} ;`;
-  }
-}
-async function euroConversor() {
-  try {
-    const respuesta = await fetch(divisas);
-    const data = await respuesta.json();
-    return data;
-  } catch (error) {
-    conversorResultado.textContent = `Algo salió mal :( ${error.message} ;`;
-  }
-}
-async function ufConversor() {
+//función que hace una petición a una API, y lo transforma a objeto
+async function Conversor() {
   try {
     const respuesta = await fetch(divisas);
     const data = await respuesta.json();
@@ -39,7 +21,7 @@ async function ufConversor() {
 
 //funciones que reciben una promesa desde API monedas y calcula en base al valor recibido de un input
 async function renderDolar() {
-  const dolares = await dolarConversor();
+  const dolares = await Conversor();
   let dolarValue = dolares.dolar;
   let valor = dolarValue.valor;
   let inputValue = conversorInput.value;
@@ -47,7 +29,7 @@ async function renderDolar() {
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} USD`;
 }
 async function renderEuro() {
-  const euros = await euroConversor();
+  const euros = await Conversor();
   let euroValue = euros.euro;
   let valor = euroValue.valor;
   let inputValue = conversorInput.value;
@@ -55,7 +37,7 @@ async function renderEuro() {
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} EUR`;
 }
 async function renderuf() {
-  const uf = await ufConversor();
+  const uf = await Conversor();
   let ufValue = uf.uf;
   let valor = ufValue.valor;
   let inputValue = conversorInput.value;
@@ -180,7 +162,7 @@ async function rendereuroGrafica() {
 }
 
 //funcion que obtiene y retorna la data para la gráfica en uf
-async function getAndCreateDataToChartEuro() {
+async function getAndCreateDataToChartUf() {
   let titulo = "Valor de los últimos 10 días";
   let color = "rgb(255, 99, 132)";
   try {
@@ -208,7 +190,7 @@ async function getAndCreateDataToChartEuro() {
 //funcion que renderiza la grafica en uf
 async function renderufGrafica() {
   let tipoDeGrafica = "line";
-  const data = await getAndCreateDataToChartEuro();
+  const data = await getAndCreateDataToChartUf();
   const config = {
     type: tipoDeGrafica,
     data,
