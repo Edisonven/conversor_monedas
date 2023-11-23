@@ -5,11 +5,12 @@ let alertId1 = document.getElementById("alert-1");
 let alertId2 = document.getElementById("alert-2");
 let dolarURL = "https://www.mindicador.cl/api/dolar";
 let euroURL = "https://www.mindicador.cl/api/euro";
+let divisas = "https://www.mindicador.cl/api";
 
 //función que hace una petición a una API, y lo transforma a objeto
 async function dolarConversor() {
   try {
-    const respuesta = await fetch(dolarURL);
+    const respuesta = await fetch(divisas);
     const data = await respuesta.json();
     return data;
   } catch (error) {
@@ -18,7 +19,7 @@ async function dolarConversor() {
 }
 async function euroConversor() {
   try {
-    const respuesta = await fetch(euroURL);
+    const respuesta = await fetch(divisas);
     const data = await respuesta.json();
     return data;
   } catch (error) {
@@ -29,18 +30,18 @@ async function euroConversor() {
 //función que recibe una promesa desde API monedas y calcula en base al valor recibido de un input
 async function renderDolar() {
   const dolares = await dolarConversor();
-  series = dolares.serie;
-  seriePrimerValor = series[0].valor;
+  let dolarValue = dolares.dolar;
+  let valor = dolarValue.valor;
   let inputValue = conversorInput.value;
-  resultado = Number(inputValue) / Number(seriePrimerValor);
+  resultado = Number(inputValue) / valor;
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} USD`;
 }
 async function renderEuro() {
   const euros = await euroConversor();
-  series = euros.serie;
-  seriePrimerValor = series[0].valor;
+  let euroValue = euros.euro;
+  let valor = euroValue.valor;
   let inputValue = conversorInput.value;
-  resultado = Number(inputValue) / Number(seriePrimerValor);
+  resultado = Number(inputValue) / valor;
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} EUR`;
 }
 
@@ -67,14 +68,14 @@ botonConversor.addEventListener("click", () => {
         (conversorResultado.textContent = "...");
     else {
       renderEuro();
-      rendereuroGrafica()
+      rendereuroGrafica();
       alertId1.textContent = "";
     }
   }
 });
 
 //funcion que obtiene y retorna la data para la gráfica en dolares
-async function getAndCreateDataToChart() {
+async function getAndCreateDataToChartDolar() {
   let titulo = "Valor de los últimos 10 días";
   let color = "rgb(255, 99, 132)";
   const respuesta = await fetch(dolarURL);
@@ -98,7 +99,7 @@ async function getAndCreateDataToChart() {
 //funcion que renderiza la grafica en dolares
 async function renderDolarGrafica() {
   let tipoDeGrafica = "line";
-  const data = await getAndCreateDataToChart();
+  const data = await getAndCreateDataToChartDolar();
   const config = {
     type: tipoDeGrafica,
     data,
@@ -109,7 +110,7 @@ async function renderDolarGrafica() {
 }
 
 //funcion que obtiene y retorna la data para la gráfica en euros
-async function getAndCreateDataToChart() {
+async function getAndCreateDataToChartEuro() {
   let titulo = "Valor de los últimos 10 días";
   let color = "rgb(255, 99, 132)";
   const respuesta = await fetch(euroURL);
@@ -133,7 +134,7 @@ async function getAndCreateDataToChart() {
 //funcion que renderiza la grafica en euros
 async function rendereuroGrafica() {
   let tipoDeGrafica = "line";
-  const data = await getAndCreateDataToChart();
+  const data = await getAndCreateDataToChartEuro();
   const config = {
     type: tipoDeGrafica,
     data,
