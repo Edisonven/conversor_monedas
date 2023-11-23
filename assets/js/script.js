@@ -1,8 +1,8 @@
-let conversorInput = document.getElementById("input-1");
-let conversorResultado = document.getElementById("resultado");
-let botonConversor = document.getElementById("btn-1");
-let alertId1 = document.getElementById("alert-1");
-let alertId2 = document.getElementById("alert-2");
+const conversorInput = document.getElementById("input-1");
+const conversorResultado = document.getElementById("resultado");
+const botonConversor = document.getElementById("btn-1");
+const alertId1 = document.getElementById("alert-1");
+const alertId2 = document.getElementById("alert-2");
 let dolarURL = "https://www.mindicador.cl/api/dolar";
 let euroURL = "https://www.mindicador.cl/api/euro";
 let ufURL = "https://www.mindicador.cl/api/uf";
@@ -60,7 +60,7 @@ async function renderuf() {
   let valor = ufValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toFixed(3)} UF`;
+  conversorResultado.textContent = `Resultado: $${resultado.toFixed(1)} UF`;
 }
 
 //función que muestra la conversión de moneda de peso a dolar
