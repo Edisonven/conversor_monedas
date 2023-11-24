@@ -1,6 +1,7 @@
 :root {
-  --backgroun-color: #696363;
+  --backgroun-color: #f7f8f9;
   --background-color2: #132043;
+  --background-color3: #f4f4f4;
   --color-primario: #fff;
   --color-secundario: #495e57;
   --color-terceario: #00a9ff;
@@ -12,7 +13,9 @@
 body {
   font-family: "Roboto", sans-serif;
 }
-
+.container {
+  background-color: var(--background-color3);
+}
 .conversor__container {
   padding: 0 30px;
   height: 100vh;
@@ -20,7 +23,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--background-color2);
 }
 .conversor__body {
   max-width: 600px;
@@ -32,10 +34,11 @@ body {
   align-items: center;
   justify-content: center;
   background-color: var(--color-primario);
+  box-shadow: 2px 2px 2px #adadad;
+  border: 1px solid black;
 }
 .conversor__title {
   text-align: center;
-  color: var(--color-primario);
   border-top: 1px solid var(--color-secundario);
   border-bottom: 1px solid var(--color-secundario);
   padding-bottom: 10px;
@@ -50,6 +53,7 @@ input[type="number"] {
   width: 100%;
   height: 50px;
   font-size: 1.6rem;
+  background-color: var(--backgroun-color);
 }
 [placeholder="Ingrese un monto en CLP"] {
   text-align: center;
@@ -63,9 +67,13 @@ input[type="number"] {
 .conversor__select-1 {
   width: 100%;
   height: 50px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-align: center;
   border-radius: 5px;
+  background-color: var(--backgroun-color);
+}
+.option {
+  background-color: var(--backgroun-color);
 }
 .conversor__btn-1 {
   margin: 20px 0;

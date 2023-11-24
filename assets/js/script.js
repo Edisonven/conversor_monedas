@@ -52,9 +52,7 @@ async function renderbitcoin() {
   let valor = bitcoinValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toFixed(
-    1
-  )} Bitcoin's`;
+  conversorResultado.textContent = `Resultado: $${resultado.toFixed(1)} Bitcoin's`;
 }
 async function renderUtm() {
   const utm = await divisasInfo();
