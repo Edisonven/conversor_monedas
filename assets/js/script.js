@@ -6,6 +6,8 @@ const alertId2 = document.getElementById("alert-2");
 let dolarURL = "https://www.mindicador.cl/api/dolar";
 let euroURL = "https://www.mindicador.cl/api/euro";
 let ufURL = "https://www.mindicador.cl/api/uf";
+let bitcoinURL = "https://www.mindicador.cl/api/bitcoin";
+let utmURL = "https://www.mindicador.cl/api/utm";
 let divisas = "https://www.mindicador.cl/api";
 
 //función que hace una petición a una API, y lo transforma a objeto
@@ -15,7 +17,7 @@ async function divisasInfo() {
     const data = await respuesta.json();
     return data;
   } catch (error) {
-    conversorResultado.textContent = `Algo salió mal :( ${error.message} ;`;
+    conversorResultado.textContent = `Algo salió mal :( ${error.message};`;
   }
 }
 
@@ -43,6 +45,24 @@ async function renderuf() {
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(1)} UF`;
+}
+async function renderbitcoin() {
+  const bitcoin = await divisasInfo();
+  let bitcoinValue = bitcoin.bitcoin;
+  let valor = bitcoinValue.valor;
+  let inputValue = conversorInput.value;
+  resultado = Number(inputValue) / valor;
+  conversorResultado.textContent = `Resultado: $${resultado.toFixed(
+    1
+  )} Bitcoin's`;
+}
+async function renderUtm() {
+  const utm = await divisasInfo();
+  let utmValue = utm.utm;
+  let valor = utmValue.valor;
+  let inputValue = conversorInput.value;
+  resultado = Number(inputValue) / valor;
+  conversorResultado.textContent = `Resultado: $${resultado.toFixed(1)} UTM`;
 }
 
 //función que muestra la conversión de moneda de peso a dolar
@@ -78,6 +98,24 @@ botonConversor.addEventListener("click", () => {
     else {
       renderuf();
       renderufGrafica();
+      alertId1.textContent = "";
+    }
+  } else if (select.value === "bitcoin") {
+    if (conversorInput.value === "")
+      (alertId1.textContent = "ingresa un monto"),
+        (conversorResultado.textContent = "...");
+    else {
+      renderbitcoin();
+      renderBitcoinGrafica();
+      alertId1.textContent = "";
+    }
+  } else if (select.value === "utm") {
+    if (conversorInput.value === "")
+      (alertId1.textContent = "ingresa un monto"),
+        (conversorResultado.textContent = "...");
+    else {
+      renderUtm();
+      renderUtmGrafica();
       alertId1.textContent = "";
     }
   }
@@ -191,6 +229,84 @@ async function getAndCreateDataToChartUf() {
 async function renderufGrafica() {
   let tipoDeGrafica = "line";
   const data = await getAndCreateDataToChartUf();
+  const config = {
+    type: tipoDeGrafica,
+    data,
+  };
+  const myChart = document.getElementById("myChart");
+  myChart.style.backgroundColor = "white";
+  new Chart(myChart, config);
+}
+
+//funcion que obtiene y retorna la data para la gráfica en bitcoin
+async function getAndCreateDataToChartBitcoin() {
+  let titulo = "Valor de los últimos 10 días";
+  let color = "rgb(255, 99, 132)";
+  try {
+    const respuesta = await fetch(bitcoinURL);
+    const series = await respuesta.json();
+    const labels = series.serie.map((serie) => serie.fecha.slice(0, 10));
+    labels.length = 10;
+    const data = series.serie.map((serie) => {
+      const valor = serie.valor;
+      return Number(valor);
+    });
+    const datasets = [
+      {
+        label: titulo,
+        borderColor: color,
+        data,
+      },
+    ];
+    return { labels, datasets };
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+//funcion que renderiza la grafica en bitcoin
+async function renderBitcoinGrafica() {
+  let tipoDeGrafica = "line";
+  const data = await getAndCreateDataToChartBitcoin();
+  const config = {
+    type: tipoDeGrafica,
+    data,
+  };
+  const myChart = document.getElementById("myChart");
+  myChart.style.backgroundColor = "white";
+  new Chart(myChart, config);
+}
+
+//funcion que obtiene y retorna la data para la gráfica en UTM
+async function getAndCreateDataToChartUtm() {
+  let titulo = "Valor de los últimos 10 días";
+  let color = "rgb(255, 99, 132)";
+  try {
+    const respuesta = await fetch(utmURL);
+    const series = await respuesta.json();
+    const labels = series.serie.map((serie) => serie.fecha.slice(0, 10));
+    labels.length = 10;
+    const data = series.serie.map((serie) => {
+      const valor = serie.valor;
+      return Number(valor);
+    });
+    const datasets = [
+      {
+        label: titulo,
+        borderColor: color,
+        data,
+      },
+    ];
+    return { labels, datasets };
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+//funcion que renderiza la grafica en UTM
+async function renderUtmGrafica() {
+  let tipoDeGrafica = "line";
+  const data = await getAndCreateDataToChartUtm();
   const config = {
     type: tipoDeGrafica,
     data,
