@@ -9,7 +9,7 @@ let ufURL = "https://www.mindicador.cl/api/uf";
 let divisas = "https://www.mindicador.cl/api";
 
 //función que hace una petición a una API, y lo transforma a objeto
-async function Conversor() {
+async function divisasInfo() {
   try {
     const respuesta = await fetch(divisas);
     const data = await respuesta.json();
@@ -21,7 +21,7 @@ async function Conversor() {
 
 //funciones que reciben una promesa desde API monedas y calcula en base al valor recibido de un input
 async function renderDolar() {
-  const dolares = await Conversor();
+  const dolares = await divisasInfo();
   let dolarValue = dolares.dolar;
   let valor = dolarValue.valor;
   let inputValue = conversorInput.value;
@@ -29,7 +29,7 @@ async function renderDolar() {
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} USD`;
 }
 async function renderEuro() {
-  const euros = await Conversor();
+  const euros = await divisasInfo();
   let euroValue = euros.euro;
   let valor = euroValue.valor;
   let inputValue = conversorInput.value;
@@ -37,7 +37,7 @@ async function renderEuro() {
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} EUR`;
 }
 async function renderuf() {
-  const uf = await Conversor();
+  const uf = await divisasInfo();
   let ufValue = uf.uf;
   let valor = ufValue.valor;
   let inputValue = conversorInput.value;
@@ -71,15 +71,15 @@ botonConversor.addEventListener("click", () => {
       rendereuroGrafica();
       alertId1.textContent = "";
     }
-  }else if(select.value === "uf"){
+  } else if (select.value === "uf") {
     if (conversorInput.value === "")
-    (alertId1.textContent = "ingresa un monto"),
-      (conversorResultado.textContent = "...");
-  else {
-    renderuf();
-    renderufGrafica() 
-    alertId1.textContent = "";
-  }
+      (alertId1.textContent = "ingresa un monto"),
+        (conversorResultado.textContent = "...");
+    else {
+      renderuf();
+      renderufGrafica();
+      alertId1.textContent = "";
+    }
   }
 });
 
