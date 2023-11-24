@@ -28,7 +28,7 @@ async function renderDolar() {
   let valor = dolarValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} USD`;
+  conversorResultado.textContent = `Resultado: $${resultado.toLocaleString("en-US")} USD`;
 }
 async function renderEuro() {
   const euros = await divisasInfo();
@@ -36,7 +36,7 @@ async function renderEuro() {
   let valor = euroValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toFixed(2)} EUR`;
+  conversorResultado.textContent = `Resultado: $${resultado.toLocaleString("en-US")} EUR`;
 }
 async function renderuf() {
   const uf = await divisasInfo();
@@ -52,7 +52,9 @@ async function renderbitcoin() {
   let valor = bitcoinValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toFixed(1)} Bitcoin's`;
+  conversorResultado.textContent = `Resultado: $${resultado.toFixed(
+    1
+  )} Bitcoin's`;
 }
 async function renderUtm() {
   const utm = await divisasInfo();
