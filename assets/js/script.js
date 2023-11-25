@@ -9,7 +9,7 @@ let ufURL = "https://www.mindicador.cl/api/uf";
 let bitcoinURL = "https://www.mindicador.cl/api/bitcoin";
 let utmURL = "https://www.mindicador.cl/api/utm";
 let divisas = "https://www.mindicador.cl/api";
-let chart;
+let chart="";
 
 //función que hace una petición a una API, y lo transforma a objeto
 async function divisasInfo() {
@@ -18,7 +18,7 @@ async function divisasInfo() {
     const data = await respuesta.json();
     return data;
   } catch (error) {
-    conversorResultado.textContent = `Algo salió mal :( ${error.message};`;
+    conversorResultado.textContent = "Algo salió mal :(";
   }
 }
 
