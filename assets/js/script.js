@@ -9,6 +9,7 @@ let ufURL = "https://www.mindicador.cl/api/uf";
 let bitcoinURL = "https://www.mindicador.cl/api/bitcoin";
 let utmURL = "https://www.mindicador.cl/api/utm";
 let divisas = "https://www.mindicador.cl/api";
+let chart;
 
 //función que hace una petición a una API, y lo transforma a objeto
 async function divisasInfo() {
@@ -28,7 +29,9 @@ async function renderDolar() {
   let valor = dolarValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toLocaleString("en-US")} USD`;
+  conversorResultado.textContent = `Resultado: $${resultado.toLocaleString(
+    "en-US"
+  )} USD`;
 }
 async function renderEuro() {
   const euros = await divisasInfo();
@@ -36,7 +39,9 @@ async function renderEuro() {
   let valor = euroValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toLocaleString("en-US")} EUR`;
+  conversorResultado.textContent = `Resultado: $${resultado.toLocaleString(
+    "en-US"
+  )} EUR`;
 }
 async function renderuf() {
   const uf = await divisasInfo();
@@ -157,7 +162,12 @@ async function renderDolarGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
-  new Chart(myChart, config);
+  if (chart) {
+    chart.destroy();
+    chart = new Chart(myChart, config);
+  } else {
+    chart = new Chart(myChart, config);
+  }
 }
 
 //funcion que obtiene y retorna la data para la gráfica en euros
@@ -196,7 +206,13 @@ async function rendereuroGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
-  new Chart(myChart, config);
+
+  if (chart) {
+    chart.destroy();
+    chart = new Chart(myChart, config);
+  } else {
+    chart = new Chart(myChart, config);
+  }
 }
 
 //funcion que obtiene y retorna la data para la gráfica en uf
@@ -235,7 +251,12 @@ async function renderufGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
-  new Chart(myChart, config);
+  if (chart) {
+    chart.destroy();
+    chart = new Chart(myChart, config);
+  } else {
+    chart = new Chart(myChart, config);
+  }
 }
 
 //funcion que obtiene y retorna la data para la gráfica en bitcoin
@@ -274,7 +295,12 @@ async function renderBitcoinGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
-  new Chart(myChart, config);
+  if (chart) {
+    chart.destroy();
+    chart = new Chart(myChart, config);
+  } else {
+    chart = new Chart(myChart, config);
+  }
 }
 
 //funcion que obtiene y retorna la data para la gráfica en UTM
@@ -313,5 +339,10 @@ async function renderUtmGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
-  new Chart(myChart, config);
+  if (chart) {
+    chart.destroy();
+    chart = new Chart(myChart, config);
+  } else {
+    chart = new Chart(myChart, config);
+  }
 }
