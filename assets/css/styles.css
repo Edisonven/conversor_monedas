@@ -71,6 +71,7 @@ input[type="number"] {
   text-align: center;
   border-radius: 5px;
   background-color: var(--backgroun-color);
+  padding: 0 20px;
 }
 .option {
   background-color: var(--backgroun-color);

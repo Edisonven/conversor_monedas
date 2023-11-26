@@ -1,8 +1,6 @@
 const conversorInput = document.getElementById("input-1");
 const conversorResultado = document.getElementById("resultado");
 const botonConversor = document.getElementById("btn-1");
-const alertId1 = document.getElementById("alert-1");
-const alertId2 = document.getElementById("alert-2");
 let dolarURL = "https://www.mindicador.cl/api/dolar";
 let euroURL = "https://www.mindicador.cl/api/euro";
 let ufURL = "https://www.mindicador.cl/api/uf";
@@ -73,9 +71,12 @@ async function renderUtm() {
 //función que muestra la conversión de monedas
 botonConversor.addEventListener("click", () => {
   let select = document.getElementById("select-1");
+  const alertId1 = document.getElementById("alert-1");
+  const alertId2 = document.getElementById("alert-2");
   //condicional que evalúa la opción seleccionada y compara si está o no vacía para indicar qué hacer
   if (select.value === "coin") {
     alertId2.textContent = "Selecciona una moneda";
+    alertId1.textContent = "";
   } else {
     alertId2.textContent = "";
   }
