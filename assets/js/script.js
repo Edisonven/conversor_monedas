@@ -9,7 +9,7 @@ let ufURL = "https://www.mindicador.cl/api/uf";
 let bitcoinURL = "https://www.mindicador.cl/api/bitcoin";
 let utmURL = "https://www.mindicador.cl/api/utm";
 let divisas = "https://www.mindicador.cl/api";
-let chart="";
+let chart = "";
 
 //función que hace una petición a una API, y lo transforma a objeto
 async function divisasInfo() {
@@ -70,15 +70,17 @@ async function renderUtm() {
   conversorResultado.textContent = `Resultado: $${resultado.toFixed(1)} UTM`;
 }
 
-//función que muestra la conversión de moneda de peso a dolar
+//función que muestra la conversión de monedas
 botonConversor.addEventListener("click", () => {
   let select = document.getElementById("select-1");
+  //condicional que evalúa la opción seleccionada y compara si está o no vacía para indicar qué hacer
   if (select.value === "coin") {
     alertId2.textContent = "Selecciona una moneda";
   } else {
     alertId2.textContent = "";
   }
   if (select.value === "dolar") {
+    //condicional que evalúa si la opción seleccionada está o no vacía para renderizar la moneda a convertir
     if (conversorInput.value === "")
       (alertId1.textContent = "ingresa un monto"),
         (conversorResultado.textContent = "...");
@@ -126,7 +128,7 @@ botonConversor.addEventListener("click", () => {
   }
 });
 
-//funcione que obtiene y retorna la data para la gráfica en dolares
+//función que obtiene y retorna la data para la gráfica en dolares
 async function getAndCreateDataToChartDolar() {
   let titulo = "Valor de los últimos 10 días";
   let color = "rgb(255, 99, 132)";
@@ -162,6 +164,7 @@ async function renderDolarGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
+  //condicional que evalúa si está creada la gráfica para destruirla y volver a crearla
   if (chart) {
     chart.destroy();
     chart = new Chart(myChart, config);
@@ -206,7 +209,7 @@ async function rendereuroGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
-
+  //condicional que evalúa si está creada la gráfica para destruirla y volver a crearla
   if (chart) {
     chart.destroy();
     chart = new Chart(myChart, config);
@@ -251,6 +254,7 @@ async function renderufGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
+  //condicional que evalúa si está creada la gráfica para destruirla y volver a crearla
   if (chart) {
     chart.destroy();
     chart = new Chart(myChart, config);
@@ -295,6 +299,7 @@ async function renderBitcoinGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
+  //condicional que evalúa si está creada la gráfica para destruirla y volver a crearla
   if (chart) {
     chart.destroy();
     chart = new Chart(myChart, config);
@@ -339,6 +344,7 @@ async function renderUtmGrafica() {
   };
   const myChart = document.getElementById("myChart");
   myChart.style.backgroundColor = "white";
+  //condicional que evalúa si está creada la gráfica para destruirla y volver a crearla
   if (chart) {
     chart.destroy();
     chart = new Chart(myChart, config);
