@@ -27,9 +27,13 @@ async function renderDolar() {
   let valor = dolarValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toLocaleString(
-    "en-US"
-  )} USD`;
+  conversorResultado.textContent = `Resultado: ${resultado.toLocaleString(
+    "us-us",
+    {
+      style: "currency",
+      currency: "USD",
+    }
+  )}`;
 }
 async function renderEuro() {
   const euros = await divisasInfo();
@@ -37,9 +41,13 @@ async function renderEuro() {
   let valor = euroValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toLocaleString(
-    "en-US"
-  )} EUR`;
+  conversorResultado.textContent = `Resultado: ${resultado.toLocaleString(
+    "es-ES",
+    {
+      style: "currency",
+      currency: "EUR",
+    }
+  )}`;
 }
 async function renderuf() {
   const uf = await divisasInfo();
@@ -47,7 +55,13 @@ async function renderuf() {
   let valor = ufValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toFixed(1)} UF`;
+  conversorResultado.textContent = `resultado: ${resultado.toLocaleString(
+    "es-CL",
+    {
+      style: "currency",
+      currency: "CLF",
+    }
+  )} `;
 }
 async function renderbitcoin() {
   const bitcoin = await divisasInfo();
@@ -55,9 +69,13 @@ async function renderbitcoin() {
   let valor = bitcoinValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toFixed(
-    1
-  )} Bitcoin's`;
+  conversorResultado.textContent = `resultado: ${resultado.toLocaleString(
+    "en-US",
+    {
+      style: "currency",
+      currency: "BTC",
+    }
+  )} `;
 }
 async function renderUtm() {
   const utm = await divisasInfo();
@@ -65,7 +83,13 @@ async function renderUtm() {
   let valor = utmValue.valor;
   let inputValue = conversorInput.value;
   resultado = Number(inputValue) / valor;
-  conversorResultado.textContent = `Resultado: $${resultado.toFixed(1)} UTM`;
+  conversorResultado.textContent = `resultado: ${resultado.toLocaleString(
+    "es-CL",
+    {
+      style: "currency",
+      currency: "CLP",
+    }
+  )} `;
 }
 
 //función que muestra la conversión de monedas
