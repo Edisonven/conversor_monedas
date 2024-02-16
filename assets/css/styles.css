@@ -15,6 +15,9 @@ body {
 }
 .container {
   background-color: var(--background-color3);
+  background-image: url(../images/gold-money-coins-wallpaper-preview.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .conversor__container {
   padding: 0 30px;
@@ -25,6 +28,7 @@ body {
   justify-content: center;
 }
 .conversor__body {
+  color: var(--background-color3);
   max-width: 600px;
   width: 100%;
   padding: 30px 20px;
@@ -33,7 +37,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-primario);
+  background-color: transparent;
+  backdrop-filter: blur(5px);
   box-shadow: 1px 1px 2px #adadad, -1px -1px 2px #adadad;
   border: 1px solid black;
 }
@@ -44,6 +49,7 @@ body {
   padding-bottom: 10px;
   font-size: 3rem;
   margin-bottom: 50px;
+  color: var(--background-color3);
 }
 .conversor__body__title {
   font-size: 2rem;
